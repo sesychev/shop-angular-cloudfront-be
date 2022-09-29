@@ -1,6 +1,6 @@
 const products = require("../mocks/products.json");
 
-module.exports.getProductsList = async () => {
+export const getProductsList = async () => {
   return {
     statusCode: 200,
     headers: {

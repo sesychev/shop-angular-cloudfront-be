@@ -1,6 +1,6 @@
 const products = require("../mocks/products.json");
 
-module.exports.getProductById = async (event) => {
+export const getProductById = async (event) => {
   const product = event.pathParameters.productId;
   const check = products.find((p) => p.id === product);
   if (check) {

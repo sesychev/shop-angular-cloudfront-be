@@ -14,6 +14,18 @@
 service: product-service
 frameworkVersion: '3'
 
+plugins:
+  - serverless-webpack
+
+package:
+  individually: true
+
+custom:
+  webpack: # serverless-webpack plugin options
+    webpackConfig: webpack.config.js # Name of webpack configuration file
+    includeModules: true # Node modules configuration for packaging
+    packager: 'npm' # Packager that will be used to package your external modules
+    
 provider:
   name: aws
   runtime: nodejs12.x
