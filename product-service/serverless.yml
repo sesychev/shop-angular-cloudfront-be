@@ -22,16 +22,17 @@ provider:
 
 functions:
   getProductsList:
-    handler: handler.getProductsList
+    handler: handlers/getProductsList.getProductsList
     events:
       - http:
           path: /products
           method: get
           cors: true
   getProductById:
-    handler: handler.getProductById
+    handler: handlers/getProductById.getProductById
     events:
       - http:
           path: /products/{productId}
           method: get
           cors: true
+

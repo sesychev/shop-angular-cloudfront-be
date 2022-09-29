@@ -1,6 +1,6 @@
-import products from "../mocks/products.json";
+const products = require("../mocks/products.json");
 
-const getProductsList = async () => {
+module.exports.getProductsList = async () => {
   return {
     statusCode: 200,
     headers: {
@@ -11,4 +11,3 @@ const getProductsList = async () => {
   };
 };
 
-export default getProductsList;
