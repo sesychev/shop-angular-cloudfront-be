@@ -1,0 +1,24 @@
+[
+  {
+    "id": "69",
+    "title": "MILK COMPRESSION",
+    "description": "compression",
+    "price": "11",
+    "count": "1",
+    "gender": "ladies-socks",
+    "style": "boot-socks",
+    "material": "wool",
+    "colour": "gray"
+  },
+  {
+    "id": "99",
+    "title": "DISNEY STAR WARS",
+    "description": "cushioned",
+    "price": "22",
+    "count": "2",
+    "gender": "kids",
+    "style": "school",
+    "material": "bamboo",
+    "colour": "navy"
+  }
+]

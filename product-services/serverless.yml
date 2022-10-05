@@ -1,0 +1,61 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: product-services
+frameworkVersion: '3'
+
+plugins:
+  - serverless-webpack
+  - serverless-dotenv-plugin
+
+package:
+  individually: true
+
+custom:
+  webpack: # serverless-webpack plugin options
+    webpackConfig: 'webpack.config.js' # Name of webpack configuration file
+    includeModules: true # Node modules configuration for packaging
+    packager: 'npm' # Packager that will be used to package your external modules
+    
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: eu-west-1
+
+functions:
+  getProductsList:
+    handler: handlers/getProductsList.getProductsList
+    events:
+      - http:
+          path: /products
+          method: get
+          cors: true
+  getProductById:
+    handler: handlers/getProductById.getProductById
+    events:
+      - http:
+          path: /products/{productId}
+          method: get
+          cors: true
+  postProducts:
+    handler: handlers/postProducts.postProducts
+    events:
+      - http:
+          path: /products
+          method: post
+          cors: true
+
+
+
+
