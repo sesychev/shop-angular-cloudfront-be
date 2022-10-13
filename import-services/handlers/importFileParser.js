@@ -13,6 +13,7 @@ export const importFileParser = async (event) => {
 
   try {
     const s3 = new AWS.S3({ region: "eu-west-1" });
+    const sqs = new AWS.SQS();
 
     for (const record of event.Records) {
       const key = record.s3.object.key;
@@ -22,10 +23,21 @@ export const importFileParser = async (event) => {
       };
 
       const s3Stream = await s3.getObject(params).createReadStream();
+
       await new Promise(() => {
         s3Stream
           .pipe(csv())
-          .on("data", (data) => console.log(data))
+          .on("data", (data) => {
+            sqs.sendMessage(
+              {
+                QueueUrl: process.env.SQS_URL,
+                MessageBody: JSON.stringify(data),
+              },
+              function (error, inf) {
+                return error ? console.log(error) : console.log(inf);
+              }
+            );
+          })
           .on("end", async () => {
             await s3
               .copyObject({
@@ -34,6 +46,7 @@ export const importFileParser = async (event) => {
                 Key: key.replace("uploaded", "parsed"),
               })
               .promise();
+
             await s3
               .deleteObject({
                 Bucket: BUCKET,
@@ -46,7 +59,7 @@ export const importFileParser = async (event) => {
     return {
       statusCode: 200,
       headers: HEADERS,
-      body: JSON.stringify("Parsed", null, 2),
+      body: JSON.stringify("parsed", null, 2),
     };
   } catch (e) {
     console.error(e);

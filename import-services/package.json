@@ -2,8 +2,10 @@
     "dependencies": {
         "@babel/node": "^7.19.1",
         "aws-sdk": "^2.1167.0",
+        "babel": "^6.23.0",
         "babel-loader": "^8.2.5",
         "csv-parser": "^3.0.0",
+        "pg": "^8.8.0",
         "webpack-node-externals": "^3.0.0"
     },
     "devDependencies": {
