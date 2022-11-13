@@ -1,0 +1,6 @@
+# The major exceptions
+.git
+#
+dist
+node_modules
+test
